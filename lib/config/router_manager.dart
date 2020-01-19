@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:wan_android_flutter/UI/page/splash.dart';
+import 'package:wan_android_flutter/UI/page/tab/tab_main.dart';
 import 'package:wan_android_flutter/UI/widget/page_route_anim.dart';
 
 class RouteName {
@@ -23,6 +24,8 @@ class Router {
     switch(settings.name){
       case RouteName.splash:
         return NoAnimRouteBuilder(SplashPage());
+      case RouteName.tab:
+        return NoAnimRouteBuilder(TabMain());
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wan_android_flutter/config/resource_manager.dart';
+import 'package:wan_android_flutter/config/router_manager.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 //    _logoController.forward();
 //
     _countdownController = AnimationController(
-        vsync: this, duration: Duration(seconds: 50));
+        vsync: this, duration: Duration(seconds: 5));
     _countdownController.forward();
 
     super.initState();
@@ -72,7 +73,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                         ),
                         child: AnimatedCountdown(
                           context: context,
-                          animation: StepTween(begin: _countdownController.duration.inSeconds, end: 0).animate(_countdownController),
+                          animation: StepTween(begin: _countdownController.duration.inSeconds, end: 1).animate(_countdownController),
                         ),
                       ),
                     )),
@@ -90,7 +91,7 @@ class AnimatedCountdown extends AnimatedWidget {
   AnimatedCountdown({key, this.animation, context}): super(key: key, listenable: animation) {
     animation.addStatusListener((status){
       if (status == AnimationStatus.completed) {
-        print("倒计时结束,跳转下一页面");
+        Navigator.of(context).pushReplacementNamed(RouteName.tab);
       }
     });
   }
