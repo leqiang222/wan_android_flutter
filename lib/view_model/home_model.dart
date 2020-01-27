@@ -5,11 +5,12 @@ import 'package:wan_android_flutter/service/wan_android_repository.dart';
 import 'package:wan_android_flutter/view_model/favourite_model.dart';
 
 class HomeModel extends ViewStateRefreshListModel {
+  // 轮播
   List<Banner> _banners;
+  // 置顶文章列表
   List<Article> _topArticles;
 
   List<Banner> get banners => _banners;
-
   List<Article> get topArticles => _topArticles;
 
   @override
@@ -26,9 +27,9 @@ class HomeModel extends ViewStateRefreshListModel {
       _banners = result[0];
       _topArticles = result[1];
       return result[2];
-    } else {
-      return result[0];
     }
+
+    return result[0];
   }
 
   @override

@@ -1,6 +1,3 @@
-import 'dart:collection';
-
-import 'package:dio/dio.dart';
 import 'package:wan_android_flutter/config/http/wan_http.dart';
 import 'package:wan_android_flutter/model/article.dart';
 import 'package:wan_android_flutter/model/banner.dart';
@@ -11,12 +8,12 @@ import 'package:wan_android_flutter/model/tree.dart';
 import 'package:wan_android_flutter/model/user.dart';
 
 class WanAndroidRepository {
-  static Dio http = Dio();
+  static WanHttp http = WanHttp();
 
   // 轮播
   static Future fetchBanners() async {
-    var response = await WanHttp().get(
-      "https://www.wanandroid.com/banner/json",
+    var response = await http.get(
+      "banner/json",
     );
 
     return response.data.map<Banner>( (item) {

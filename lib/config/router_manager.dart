@@ -1,9 +1,15 @@
 
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wan_android_flutter/UI/page/article/article_detail_page.dart';
+import 'package:wan_android_flutter/UI/page/article/article_detail_plugin_page.dart';
 import 'package:wan_android_flutter/UI/page/splash.dart';
 import 'package:wan_android_flutter/UI/page/tab/tab_main.dart';
 import 'package:wan_android_flutter/UI/widget/page_route_anim.dart';
+import 'package:wan_android_flutter/config/storage_manager.dart';
+import 'package:wan_android_flutter/model/article.dart';
+import 'package:wan_android_flutter/view_model/setting_model.dart';
 
 class RouteName {
   static const String splash = 'splash';
@@ -26,6 +32,18 @@ class Router {
         return NoAnimRouteBuilder(SplashPage());
       case RouteName.tab:
         return NoAnimRouteBuilder(TabMain());
+      case RouteName.articleDetail:
+        var article = settings.arguments as Article;
+        return CupertinoPageRoute(
+          builder: (_) {
+            bool isWebPlugin = StorageManager.sharedPreferences.getBool(kUseWebViewPlugin) ?? false;
+            if (isWebPlugin) {
+              return ArticleDetailPluginPage(article: article);
+            }
+
+            return ArticleDetailPage(article: article);
+          }
+        );
     }
   }
 }

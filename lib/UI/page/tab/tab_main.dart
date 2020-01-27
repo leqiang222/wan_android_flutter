@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:wan_android_flutter/UI/page/tab/home_page.dart';
+import 'package:wan_android_flutter/UI/page/tab/home_page2.dart';
+import 'package:wan_android_flutter/UI/page/tab/structure_page.dart';
 import 'package:wan_android_flutter/UI/page/tab/test_case.dart';
 
 List<Widget> pages = <Widget>[
-  /*HomePage("首页"),
-  HomePage("消息"),
-  HomePage("我的"),*/
-  TestCase(),
-  TestCase(),
-  TestCase(),
+  StructurePage(),
+  StructurePage(),
+  StructurePage(),
 ];
 
 class TabMain extends StatefulWidget {

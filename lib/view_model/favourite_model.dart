@@ -11,7 +11,6 @@ class FavouriteListModel extends ViewStateRefreshListModel<Article> {
 
   FavouriteListModel({this.loginModel});
 
-
   @override
   void onUnAuthorizedException() {
     super.onUnAuthorizedException();
