@@ -34,7 +34,7 @@ class HomeModel extends ViewStateRefreshListModel {
 
   @override
   onCompleted(List data) {
-    GlobalFavouriteStateModel.refresh(data);
+//    GlobalFavouriteStateModel.refresh(data);
   }
 
 }

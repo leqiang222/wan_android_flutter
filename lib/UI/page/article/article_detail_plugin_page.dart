@@ -93,8 +93,9 @@ class _WebViewState extends State<ArticleDetailPluginPage> {
                 onPressed: flutterWebViewPlugin.reload,
               ),
               ProviderWidget<FavouriteModel>(
-                model: FavouriteModel(
-                    globalFavouriteModel: Provider.of(context, listen: false)),
+//                model: FavouriteModel(
+//                    globalFavouriteModel: Provider.of(context, listen: false)),
+                model: FavouriteModel(),
                 builder: (context, model, child) => IconButton(
                   icon:
                       Provider.of<UserModel>(context, listen: false).hasUser &&
