@@ -16,7 +16,6 @@ void main() async {
   // 持久化相关初始化
   await StorageManager.init();
 
-
   runApp(MyApp());
 }
 
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
         builder: (context, localeModel, child) {
 //          hideFooterWhenNotFull: true, //列表数据不满一页,不触发加载更多
           return MaterialApp(
-          title: '玩android',
+            title: '玩android',
             initialRoute: RouteName.splash,
             onGenerateRoute: Router.onGenerateRoute,
             locale: localeModel.locale,
@@ -50,4 +49,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

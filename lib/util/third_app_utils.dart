@@ -16,6 +16,8 @@ class ThirdAppUtils {
       default:
         break;
     }
+
+    // 能打开app
     if (await canLaunch(scheme)) {
       return scheme;
     }
