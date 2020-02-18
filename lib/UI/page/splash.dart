@@ -8,26 +8,10 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
-//  AnimationController _logoController;
-//  Animation<double> _animation;
   AnimationController _countdownController;
 
   @override
   void initState() {
-//    _logoController = AnimationController(
-//        vsync: this, duration: Duration(milliseconds: 1500));
-//
-//    _animation = Tween(begin: 0, end: 1.0).animate(
-//        CurvedAnimation(parent: _logoController, curve: Curves.easeInOutBack));
-//    _animation.addStatusListener((status) {
-//      if (status == AnimationStatus.completed) {
-//        _logoController.reverse();
-//      } else if (status == AnimationStatus.dismissed) {
-//        _logoController.forward();
-//      }
-//    });
-//    _logoController.forward();
-//
     _countdownController = AnimationController(
         vsync: this, duration: Duration(seconds: 5));
     _countdownController.forward();
@@ -37,7 +21,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-//    _logoController.dispose();
     _countdownController.dispose();
 
     super.dispose();
@@ -62,7 +45,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                 child: SafeArea(
                     child: InkWell(
                       onTap: () {
-                        // todo
+                        Navigator.of(context).pushReplacementNamed(RouteName.tab);
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
