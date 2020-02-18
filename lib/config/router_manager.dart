@@ -33,6 +33,7 @@ class Router {
       case RouteName.tab:
         return NoAnimRouteBuilder(TabMain());
       case RouteName.articleDetail:
+        // 获取路由传递的参数
         var article = settings.arguments as Article;
         return CupertinoPageRoute(
           builder: (_) {

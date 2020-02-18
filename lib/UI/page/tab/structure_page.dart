@@ -14,32 +14,31 @@ class StructurePage extends StatefulWidget {
   }
 }
 
-class _StructurePageState extends State<StructurePage> with AutomaticKeepAliveClientMixin {
+class _StructurePageState extends State<StructurePage>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
   List<String> _tabs = ['体系', '导航'];
 
+  AppBar createAppBar() {
+    return AppBar(
+      title: TabBar(
+          isScrollable: true,
+          tabs: List.generate(_tabs.length, (index) {
+            return Tab(text: _tabs[index]);
+          })),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: _tabs.length,
       child: Scaffold(
-        appBar: AppBar(
-          title: TabBar(
-              isScrollable: true,
-              tabs: List.generate(_tabs.length, (index) {
-                return Tab(text: _tabs[index]);
-              })
-          ),
-        ),
+        appBar: createAppBar(),
         body: TabBarView(
-            children: [
-              StructureCategoryList(),
-              NavigationSiteCategoryList()
-            ]
-        ),
+            children: [StructureCategoryList(), NavigationSiteCategoryList()]),
       ),
     );
   }
@@ -53,9 +52,23 @@ class StructureCategoryList extends StatefulWidget {
   }
 }
 
-class _StructureCategoryListState extends State<StructureCategoryList> with AutomaticKeepAliveClientMixin {
+class _StructureCategoryListState extends State<StructureCategoryList>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+
+  // 创建列表容器
+  Widget createScrollView(StructureCategoryModel model) {
+    return Scrollbar(
+        // Scrollbar的作用是添加滚动指示条
+        child: ListView.builder(
+            padding: EdgeInsets.all(15),
+            itemCount: model.list.length,
+            itemBuilder: (context, index) {
+              Tree item = model.list[index];
+              return StructureCategoryWidget(item);
+            }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,16 +86,7 @@ class _StructureCategoryListState extends State<StructureCategoryList> with Auto
 //          return ViewStateErrorWidget(error: model.viewStateError, onPressed: model.initData);
 //        };
 
-        return Scrollbar( // Scrollbar的作用是添加滚动指示条
-            child: ListView.builder(
-                padding: EdgeInsets.all(15),
-                itemCount: model.list.length,
-                itemBuilder: (context, index) {
-                  Tree item = model.list[index];
-                  return StructureCategoryWidget(item);
-                }
-            )
-        );
+        return createScrollView(model);
       },
     );
   }
@@ -93,6 +97,32 @@ class StructureCategoryWidget extends StatelessWidget {
 
   StructureCategoryWidget(this.tree);
 
+  // 组标题
+  Widget createTitleView(BuildContext context) {
+    return Text(
+      tree.name,
+      style: Theme.of(context).textTheme.subtitle,
+    );
+  }
+
+  // 标签tag
+  Widget createTagsView(BuildContext context) {
+    return Wrap(
+        spacing: 10,
+        children: List.generate(tree.children.length, (index) {
+          return ActionChip(
+            label: Text(
+              tree.children[index].name,
+              maxLines: 1,
+            ),
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamed(RouteName.structureList, arguments: [tree, index]);
+            },
+          );
+        }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -100,24 +130,9 @@ class StructureCategoryWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            tree.name,
-            style: Theme.of(context).textTheme.subtitle,
-          ),
-          Wrap(
-              spacing: 10,
-              children: List.generate(tree.children.length, (index) {
-                return ActionChip(
-                  label: Text(
-                    tree.children[index].name,
-                    maxLines: 1,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(RouteName.structureList,
-                        arguments: [tree, index]);
-                  },
-                );
-              }))
+          // 标题
+          createTitleView(context),
+          createTagsView(context)
         ],
       ),
     );
@@ -136,6 +151,19 @@ class _NavigationSiteCategoryListState extends State<NavigationSiteCategoryList>
   @override
   bool get wantKeepAlive => true;
 
+  // 创建列表容器
+  Widget createScrollView(NavigationSiteModel model) {
+    return Scrollbar(
+      child: ListView.builder(
+          padding: EdgeInsets.all(15),
+          itemCount: model.list.length,
+          itemBuilder: (context, index) {
+            NavigationSite item = model.list[index];
+            return NavigationSiteCategoryWidget(item);
+          }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -147,18 +175,11 @@ class _NavigationSiteCategoryListState extends State<NavigationSiteCategoryList>
         builder: (context, model, child) {
 //          if (model.busy) {
 //            return ViewStateBusyWidget();
-//          } else if (model.error) {
+//          }
+//          if (model.error) {
 //            return ViewStateErrorWidget(error: model.viewStateError, onPressed: model.initData);
 //          }
-          return Scrollbar(
-            child: ListView.builder(
-                padding: EdgeInsets.all(15),
-                itemCount: model.list.length,
-                itemBuilder: (context, index) {
-                  NavigationSite item = model.list[index];
-                  return NavigationSiteCategoryWidget(item);
-                }),
-          );
+          return createScrollView(model);
         });
   }
 }
@@ -168,6 +189,32 @@ class NavigationSiteCategoryWidget extends StatelessWidget {
 
   NavigationSiteCategoryWidget(this.site);
 
+  // 组标题
+  Widget createTitleView(BuildContext context) {
+    return Text(
+      site.name,
+      style: Theme.of(context).textTheme.subtitle,
+    );
+  }
+
+  // 标签tag
+  Widget createTagsView(BuildContext context) {
+    return Wrap(
+        spacing: 10,
+        children: List.generate(
+            site.articles.length,
+            (index) => ActionChip(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(RouteName.articleDetail,
+                        arguments: site.articles[index]);
+                  },
+                  label: Text(
+                    site.articles[index].title,
+                    maxLines: 1,
+                  ),
+                )));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -175,25 +222,8 @@ class NavigationSiteCategoryWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            site.name,
-            style: Theme.of(context).textTheme.subtitle,
-          ),
-          Wrap(
-              spacing: 10,
-              children: List.generate(
-                  site.articles.length,
-                      (index) => ActionChip(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(
-                          RouteName.articleDetail,
-                          arguments: site.articles[index]);
-                    },
-                    label: Text(
-                      site.articles[index].title,
-                      maxLines: 1,
-                    ),
-                  )))
+          createTitleView(context),
+          createTagsView(context),
         ],
       ),
     );
