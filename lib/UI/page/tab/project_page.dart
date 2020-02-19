@@ -24,7 +24,7 @@ class _ProjectPageState extends State<ProjectPage>
 
   @override
   void initState() {
-    valueNotifier = ValueNotifier(0);
+    valueNotifier = ValueNotifier(2);
     super.initState();
   }
 
@@ -32,6 +32,35 @@ class _ProjectPageState extends State<ProjectPage>
   void dispose() {
     valueNotifier.dispose();
     super.dispose();
+  }
+
+  AppBar createAppBar(List<Tree> treeList, BuildContext context) {
+    return AppBar(
+      title: Stack(
+        children: <Widget>[
+          CategoryDropdownWidget(
+              Provider.of<ProjectCategoryModel>(context), context),
+          Container(
+            margin: const EdgeInsets.only(right: 25),
+            color: Theme.of(context).primaryColor.withOpacity(1),
+            child: TabBar(
+              isScrollable: true,
+              tabs: List.generate(treeList.length, (index) {
+                return Tab(text: treeList[index].name);
+              }),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  TabBarView createTabBarView(List<Tree> treeList) {
+    return TabBarView(
+      children: List.generate(treeList.length, (index) {
+        return ArticleListPage(treeList[index].id);
+      }),
+    );
   }
 
   @override
@@ -67,28 +96,8 @@ class _ProjectPageState extends State<ProjectPage>
               }
 
               return Scaffold(
-                appBar: AppBar(
-                  title: Stack(
-                    children: <Widget>[
-                      CategoryDropdownWidget(
-                          Provider.of<ProjectCategoryModel>(context)),
-                      Container(
-                        margin: const EdgeInsets.only(right: 25),
-                        color: primaryColor.withOpacity(1),
-                        child: TabBar(
-                            isScrollable: true,
-                            tabs: List.generate(treeList.length, (index) {
-                              return Tab(text: treeList[index].name);
-                            })),
-                      )
-                    ],
-                  ),
-                ),
-                body: TabBarView(
-                  children: List.generate(treeList.length, (index) {
-                    return ArticleListPage(treeList[index].id);
-                  }),
-                ),
+                appBar: createAppBar(treeList, context),
+                body: createTabBarView(treeList),
               );
             }),
           ),
@@ -100,12 +109,13 @@ class _ProjectPageState extends State<ProjectPage>
 
 class CategoryDropdownWidget extends StatelessWidget {
   final ViewStateListModel model;
+  final BuildContext fatherContext;
 
-  CategoryDropdownWidget(this.model);
+  CategoryDropdownWidget(this.model, this.fatherContext);
 
   @override
   Widget build(BuildContext context) {
-    int currentIndex = Provider.of<int>(context);
+    int currentIndex = Provider.of<int>(fatherContext);
     return Align(
       child: Theme(
         data: Theme.of(context).copyWith(
