@@ -12,6 +12,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    // 倒计时监听器
     _countdownController = AnimationController(
         vsync: this, duration: Duration(seconds: 5));
     _countdownController.forward();
@@ -26,6 +27,42 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  // splash图片
+  Image conentImageWidget() {
+    return Image.asset(
+      ImageHelper.wrapAssets(
+          Theme.of(context).brightness == Brightness.light
+              ? "splash_bg.png"
+              : "splash_bg_dark.png"),
+      fit: BoxFit.fill,
+    );
+  }
+
+  // 倒计时
+  Align animatedCountdownWidget() {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: SafeArea(
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(RouteName.tab);
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              margin: EdgeInsets.only(right: 20, bottom: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40),
+                color: Colors.black.withAlpha(100),
+              ),
+              child: AnimatedCountdown(
+                context: context,
+                animation: StepTween(begin: _countdownController.duration.inSeconds, end: 1).animate(_countdownController),
+              ),
+            ),
+          )),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,34 +70,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
-              Image.asset(
-                ImageHelper.wrapAssets(
-                    Theme.of(context).brightness == Brightness.light
-                        ? "splash_bg.png"
-                        : "splash_bg_dark.png"),
-                fit: BoxFit.fill,
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: SafeArea(
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushReplacementNamed(RouteName.tab);
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                        margin: EdgeInsets.only(right: 20, bottom: 20),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(40),
-                          color: Colors.black.withAlpha(100),
-                        ),
-                        child: AnimatedCountdown(
-                          context: context,
-                          animation: StepTween(begin: _countdownController.duration.inSeconds, end: 1).animate(_countdownController),
-                        ),
-                      ),
-                    )),
-              )
+              conentImageWidget(),
+              animatedCountdownWidget()
             ],
           ),
           onWillPop: null),

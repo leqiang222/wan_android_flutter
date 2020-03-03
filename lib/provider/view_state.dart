@@ -1,11 +1,11 @@
 
 /// 页面状态类型
 enum ViewState {
-  idle,
+  idle, // 空闲的
   busy, //加载中
   empty, //无数据
   error, //加载失败
-  unAuthorized, //未登录
+  unAuthorized, //未授权
 }
 
 /// 错误类型
@@ -29,7 +29,7 @@ class ViewStateError {
 
   @override
   String toString() {
-    return 'ViewStateError{errorType: $errorType, message: $message, errorMessage: $errorMessage}';
+    return 'log_provider, ViewStateError{errorType: $errorType, message: $message, errorMessage: $errorMessage}';
   }
 }
 

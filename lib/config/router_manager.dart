@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wan_android_flutter/UI/page/article/article_detail_page.dart';
@@ -11,6 +9,9 @@ import 'package:wan_android_flutter/config/storage_manager.dart';
 import 'package:wan_android_flutter/model/article.dart';
 import 'package:wan_android_flutter/view_model/setting_model.dart';
 
+/**
+ * 路由名称
+ */
 class RouteName {
   static const String splash = 'splash';
   static const String tab = '/';

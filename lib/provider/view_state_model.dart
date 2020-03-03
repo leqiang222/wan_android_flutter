@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:wan_android_flutter/config/http/http_exception.dart';
-import 'package:wan_android_flutter/config/net/api.dart';
 
 import 'view_state.dart';
 
@@ -39,13 +38,9 @@ class ViewStateModel with ChangeNotifier {
   /// 以下变量是为了代码书写方便,加入的get方法.严格意义上讲,并不严谨
 
   bool get busy => viewState == ViewState.busy;
-
   bool get idle => viewState == ViewState.idle;
-
   bool get empty => viewState == ViewState.empty;
-
   bool get error => viewState == ViewState.error;
-
   bool get unAuthorized => viewState == ViewState.unAuthorized;
 
   void setIdle() {

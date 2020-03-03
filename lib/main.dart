@@ -20,6 +20,14 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates = const [
+    S.delegate,
+    RefreshLocalizations.delegate, //下拉刷新
+    GlobalCupertinoLocalizations.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -33,13 +41,7 @@ class MyApp extends StatelessWidget {
             onGenerateRoute: Router.onGenerateRoute,
             locale: localeModel.locale,
             supportedLocales: S.delegate.supportedLocales,
-            localizationsDelegates: const [
-              S.delegate,
-              RefreshLocalizations.delegate, //下拉刷新
-              GlobalCupertinoLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
+            localizationsDelegates: localizationsDelegates,
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),

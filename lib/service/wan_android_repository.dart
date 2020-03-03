@@ -18,7 +18,7 @@ class WanAndroidRepository {
 
     return response.data.map<Banner>( (item) {
               return Banner.fromJsonMap(item);
-            }).toList();
+            }).List();
   }
 
   // 置顶文章

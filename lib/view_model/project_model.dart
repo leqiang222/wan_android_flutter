@@ -10,7 +10,6 @@ class ProjectCategoryModel extends ViewStateListModel<Tree> {
   Future<List<Tree>> loadData() async {
     return await WanAndroidRepository.fetchProjectCategories();
   }
-
 }
 
 class ProjectListModel extends ViewStateRefreshListModel<Article> {
