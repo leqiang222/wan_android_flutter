@@ -4,6 +4,7 @@ import 'package:wan_android_flutter/config/router_manager.dart';
 import 'package:wan_android_flutter/model/navigation_site.dart';
 import 'package:wan_android_flutter/model/tree.dart';
 import 'package:wan_android_flutter/provider/provider_widget.dart';
+import 'package:wan_android_flutter/provider/view_state_widget.dart';
 import 'package:wan_android_flutter/view_model/structure_model.dart';
 
 /// 体系
@@ -78,13 +79,13 @@ class _StructureCategoryListState extends State<StructureCategoryList>
         model.initData();
       },
       builder: (context, model, child) {
-//        if (model.busy) {
-//          return ViewStateBusyWidget();
-//        }
-//
-//        if (model.error && model.list.isEmpty) {
-//          return ViewStateErrorWidget(error: model.viewStateError, onPressed: model.initData);
-//        };
+        if (model.busy) {
+          return ViewStateBusyWidget();
+        }
+
+        if (model.error && model.list.isEmpty) {
+          return ViewStateErrorWidget(error: model.viewStateError, onPressed: model.initData);
+        }
 
         return createScrollView(model);
       },
@@ -173,12 +174,12 @@ class _NavigationSiteCategoryListState extends State<NavigationSiteCategoryList>
           model.initData();
         },
         builder: (context, model, child) {
-//          if (model.busy) {
-//            return ViewStateBusyWidget();
-//          }
-//          if (model.error) {
-//            return ViewStateErrorWidget(error: model.viewStateError, onPressed: model.initData);
-//          }
+          if (model.busy) {
+            return ViewStateBusyWidget();
+          }
+          if (model.error) {
+            return ViewStateErrorWidget(error: model.viewStateError, onPressed: model.initData);
+          }
           return createScrollView(model);
         });
   }

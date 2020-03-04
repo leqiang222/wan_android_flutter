@@ -1,5 +1,3 @@
-//import 'package:flutter/widgets.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +5,7 @@ import 'package:wan_android_flutter/UI/page/article/article_list_page.dart';
 import 'package:wan_android_flutter/model/tree.dart';
 import 'package:wan_android_flutter/provider/provider_widget.dart';
 import 'package:wan_android_flutter/provider/view_state_list_model.dart';
+import 'package:wan_android_flutter/provider/view_state_widget.dart';
 import 'package:wan_android_flutter/view_model/project_model.dart';
 
 class ProjectPage extends StatefulWidget {
@@ -24,7 +23,7 @@ class _ProjectPageState extends State<ProjectPage>
 
   @override
   void initState() {
-    valueNotifier = ValueNotifier(2);
+    valueNotifier = ValueNotifier(0);
     super.initState();
   }
 
@@ -36,12 +35,12 @@ class _ProjectPageState extends State<ProjectPage>
 
   AppBar createAppBar(List<Tree> treeList, BuildContext context) {
     return AppBar(
-      title: Stack(
+      title: Stack( // 用Stack, 标题滚动栏遮挡下拉栏
         children: <Widget>[
           CategoryDropdownWidget(
-              Provider.of<ProjectCategoryModel>(context), context),
+              Provider.of<ProjectCategoryModel>(context)),
           Container(
-            margin: const EdgeInsets.only(right: 25),
+            margin: const EdgeInsets.only(right: 30),
             color: Theme.of(context).primaryColor.withOpacity(1),
             child: TabBar(
               isScrollable: true,
@@ -72,12 +71,12 @@ class _ProjectPageState extends State<ProjectPage>
       },
       builder:
           (BuildContext context, ProjectCategoryModel value, Widget child) {
-//        if (value.busy) {
-//          return ViewStateBusyWidget();
-//        }
-//        if (value.error) {
-//          return ViewStateErrorWidget(error: value.viewStateError, onPressed: value.initData);
-//        }
+        if (value.busy) {
+          return ViewStateBusyWidget();
+        }
+        if (value.error) {
+          return ViewStateErrorWidget(error: value.viewStateError, onPressed: value.initData);
+        }
 
         List<Tree> treeList = value.list;
         var primaryColor = Theme.of(context).primaryColor;
@@ -109,13 +108,12 @@ class _ProjectPageState extends State<ProjectPage>
 
 class CategoryDropdownWidget extends StatelessWidget {
   final ViewStateListModel model;
-  final BuildContext fatherContext;
-
-  CategoryDropdownWidget(this.model, this.fatherContext);
+  CategoryDropdownWidget(this.model);
 
   @override
   Widget build(BuildContext context) {
-    int currentIndex = Provider.of<int>(fatherContext);
+    int currentIndex = Provider.of<int>(context);
+
     return Align(
       child: Theme(
         data: Theme.of(context).copyWith(
