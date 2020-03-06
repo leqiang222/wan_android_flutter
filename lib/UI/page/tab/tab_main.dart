@@ -4,9 +4,9 @@ import 'package:wan_android_flutter/UI/page/tab/project_page.dart';
 import 'package:wan_android_flutter/UI/page/tab/structure_page.dart';
 
 List<Widget> pages = <Widget>[
+  HomePage(),
   ProjectPage(),
   StructurePage(),
-  HomePage(),
 ];
 
 class TabMain extends StatefulWidget {

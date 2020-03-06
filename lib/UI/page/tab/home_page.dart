@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return HomePageState2();
+    return HomePageState();
   }
 }
 
@@ -38,13 +38,12 @@ class HomePageState2 extends State<HomePage> {
 
     return CustomScrollView(
       slivers: <Widget>[
-        SliverToBoxAdapter(),
         SliverAppBar(
           pinned: true,
           expandedHeight: bannerHeight,
           brightness: Brightness.dark,
           flexibleSpace: FlexibleSpaceBar(
-            title: const Text('玩安卓'),
+            title: const Text('玩安卓8'),
             background: BannerWidget(),
           ),
           actions: <Widget>[
@@ -73,36 +72,37 @@ class HomePageState2 extends State<HomePage> {
               childCount: 50 //50个列表项
           ),
         ),
+
+        SliverToBoxAdapter(
+          child: Container(
+            color: Colors.red,
+            height: 200,
+          ),
+        ),
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return SmartRefresher(
-        controller: _refreshController,
-        header: WaterDropHeader(),
-        footer: RefresherFooter(),
-        enablePullUp: true,
-        child: creatScroll(context),
+    return Scaffold (
+      body: MediaQuery.removePadding(
+          context: context,
+          child: SmartRefresher(
+            controller: _refreshController,
+            header: WaterDropHeader(),
+            footer: RefresherFooter(),
+            enablePullUp: true,
+            child: creatScroll(context),
+          ),)
     );
-//    return Material(
-//      child: RefreshConfiguration.copyAncestor(
-//          context: context,
-//          child: SmartRefresher(
-//            controller: _refreshController,
-//            footer: RefresherFooter(),
-//            enablePullDown: true,
-//            child: creatScroll(context),
-//          )),
-//    );
   }
 }
 
 // AutomaticKeepAliveClientMixin: 切换tab后保留tab的状态，避免initState方法重复调用
 class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   @override
-  bool get wantKeepAlive => null;
+  bool get wantKeepAlive => true;
 
   Widget build(BuildContext context) {
     // 轮播高度
@@ -110,8 +110,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
 
     return ProviderWidget2<HomeModel, TapToTopModel>(
         model1: HomeModel(),
-        model2: TapToTopModel(PrimaryScrollController.of(context),
-            height: bannerHeight - kToolbarHeight),
+        model2: TapToTopModel(PrimaryScrollController.of(context), height: bannerHeight - kToolbarHeight),
         onModelReady: (homeModel, tapToTopModel) {
           homeModel.initData();
           tapToTopModel.init();
@@ -120,7 +119,6 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
           return Scaffold(
             body: MediaQuery.removePadding(
               context: context,
-              removeTop: false,
               child: Builder(builder: (_){
                 if (homeModel.error && homeModel.list.isEmpty) {
                   return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -130,9 +128,9 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
                           onPressed: homeModel.initData));
                 }
 
-                return RefreshConfiguration.copyAncestor(
-                    context: context,
-                    child: SmartRefresher(
+//                return RefreshConfiguration.copyAncestor(
+//                    context: context,
+                return SmartRefresher(
                       controller: homeModel.refreshController,
                       footer: RefresherFooter(),
                       enablePullDown: homeModel.list.isNotEmpty,
@@ -186,8 +184,8 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
                             HomeArticleList(),
                         ],
                       ),
-                    )
-                );
+                    );
+//                );
               }),
             ),
           );
