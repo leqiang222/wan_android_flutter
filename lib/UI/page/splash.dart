@@ -74,7 +74,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               animatedCountdownWidget()
             ],
           ),
-          onWillPop: null),
+          onWillPop: () => Future.value(false)),
     );
   }
 }
