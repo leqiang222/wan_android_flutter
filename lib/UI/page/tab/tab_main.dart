@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:wan_android_flutter/UI/page/tab/home_page.dart';
 import 'package:wan_android_flutter/UI/page/tab/project_page.dart';
 import 'package:wan_android_flutter/UI/page/tab/structure_page.dart';
+import 'package:wan_android_flutter/UI/page/tab/user_page.dart';
 
 List<Widget> pages = <Widget>[
   HomePage(),
   ProjectPage(),
   StructurePage(),
+  UserPage(),
 ];
 
 class TabMain extends StatefulWidget {
@@ -58,6 +60,8 @@ class TabMainState extends State<TabMain> {
         onTap: (int index) {
           _pageController.jumpToPage(index);
         },
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.green,
       ),
     );
   }
@@ -81,15 +85,19 @@ class TabItemInfo {
   static List _tabData = [
     {
       'tabTitle': '首页',
-      'tabIcon': new Icon(Icons.home),
+      'tabIcon': Icon(Icons.home),
     },
     {
-      'tabTitle': '消息',
-      'tabIcon': new Icon(Icons.message),
+      'tabTitle': '项目',
+      'tabIcon': Icon(Icons.apps),
+    },
+    {
+      'tabTitle': '体系',
+      'tabIcon': Icon(Icons.category),
     },
     {
       'tabTitle': '我的',
-      'tabIcon': new Icon(Icons.person),
+      'tabIcon': Icon(Icons.person),
     },
   ];
 

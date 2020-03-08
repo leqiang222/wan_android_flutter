@@ -16,9 +16,14 @@ class UserModel extends ChangeNotifier {
   bool get hasUser => user != null;
 
 //  UserModel({@required this.globalFavouriteStateModel}) {
-//    var userMap = StorageManager.localStorage.getItem(kUser);
-//    _user = userMap != null ? User.fromJsonMap(userMap) : null;
-//  }
+////    var userMap = StorageManager.localStorage.getItem(kUser);
+////    _user = userMap != null ? User.fromJsonMap(userMap) : null;
+////  }
+
+    UserModel() {
+      var userMap = StorageManager.localStorage.getItem(kUser);
+      _user = userMap != null ? User.fromJsonMap(userMap) : null;
+    }
 
   saveUser(User user) {
     _user = user;

@@ -20,6 +20,9 @@ List<SingleChildCloneableWidget> independentServices = [
 //  ChangeNotifierProvider<GlobalFavouriteStateModel>(
 //    create: (context) => GlobalFavouriteStateModel(),
 //  )
+  ChangeNotifierProvider<UserModel>(
+      create: (context) => UserModel(),
+  )
 ];
 
 /// 需要依赖的model
