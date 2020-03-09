@@ -101,9 +101,6 @@ class $zh_CN extends S {
   const $zh_CN();
 
   @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
   String get favourites => "收藏";
   @override
   String get appUpdateLeastVersion => "已是最新版本";
@@ -250,8 +247,8 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale("en", ""),
       Locale("zh", "CN"),
+      Locale("en", ""),
     ];
   }
 
@@ -259,9 +256,9 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
     return (List<Locale> locales, Iterable<Locale> supported) {
       if (locales == null || locales.isEmpty) {
         return fallback ?? supported.first;
-      } else {
-        return _resolve(locales.first, fallback, supported, withCountry);
       }
+
+      return _resolve(locales.first, fallback, supported, withCountry);
     };
   }
 
@@ -305,14 +302,17 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
     }
 
     final Locale languageLocale = Locale(locale.languageCode, "");
+
     if (supported.contains(locale)) {
       return locale;
-    } else if (supported.contains(languageLocale)) {
-      return languageLocale;
-    } else {
-      final Locale fallbackLocale = fallback ?? supported.first;
-      return fallbackLocale;
     }
+
+    if (supported.contains(languageLocale)) {
+      return languageLocale;
+    }
+
+    final Locale fallbackLocale = fallback ?? supported.first;
+    return fallbackLocale;
   }
 
   ///

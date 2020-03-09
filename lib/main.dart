@@ -20,6 +20,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  // 本地化
   final Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates = const [
     S.delegate,
     RefreshLocalizations.delegate, //下拉刷新
@@ -42,9 +43,7 @@ class MyApp extends StatelessWidget {
             locale: localeModel.locale,
             supportedLocales: S.delegate.supportedLocales,
             localizationsDelegates: localizationsDelegates,
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
+            theme: ThemeData(primarySwatch: Colors.blue),
           );
         },
       ),
