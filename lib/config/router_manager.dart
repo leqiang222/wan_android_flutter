@@ -4,6 +4,7 @@ import 'package:wan_android_flutter/UI/page/article/article_detail_page.dart';
 import 'package:wan_android_flutter/UI/page/article/article_detail_plugin_page.dart';
 import 'package:wan_android_flutter/UI/page/splash.dart';
 import 'package:wan_android_flutter/UI/page/tab/tab_main.dart';
+import 'package:wan_android_flutter/UI/user/login_page.dart';
 import 'package:wan_android_flutter/UI/widget/page_route_anim.dart';
 import 'package:wan_android_flutter/config/storage_manager.dart';
 import 'package:wan_android_flutter/model/article.dart';
@@ -33,6 +34,8 @@ class Router {
         return NoAnimRouteBuilder(SplashPage());
       case RouteName.tab:
         return NoAnimRouteBuilder(TabMain());
+      case RouteName.login:
+        return NoAnimRouteBuilder(LoginPage());
       case RouteName.articleDetail:
         // 获取路由传递的参数
         var article = settings.arguments as Article;

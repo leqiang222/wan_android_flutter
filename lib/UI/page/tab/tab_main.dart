@@ -3,10 +3,8 @@ import 'package:wan_android_flutter/UI/page/tab/home_page.dart';
 import 'package:wan_android_flutter/UI/page/tab/project_page.dart';
 import 'package:wan_android_flutter/UI/page/tab/structure_page.dart';
 import 'package:wan_android_flutter/UI/page/tab/user_page.dart';
-import 'package:wan_android_flutter/UI/user/login_page.dart';
 
 List<Widget> pages = <Widget>[
-  LoginPage(),
   HomePage(),
   ProjectPage(),
   StructurePage(),
@@ -84,11 +82,7 @@ class TabItemInfo {
   String tabTitle;
   Icon tabIcon;
 
-  static List _tabData = [
-    {
-      'tabTitle': '登录',
-      'tabIcon': Icon(Icons.account_circle),
-    },
+  static List _tabData = [ 
     {
       'tabTitle': '首页',
       'tabIcon': Icon(Icons.home),

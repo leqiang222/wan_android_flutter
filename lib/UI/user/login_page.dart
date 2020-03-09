@@ -24,6 +24,17 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  Widget createPopLogin () {
+    return Container(
+      padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+      child: IconButton(
+          icon: Icon(Icons.close, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pop();
+          }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,11 +46,13 @@ class _LoginPageState extends State<LoginPage> {
             child: Stack(
               children: <Widget>[
                 LoginTopPanel(),
+                createPopLogin(),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 50),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
+
                       LoginLogo(),
                       LoginFormContainer(
                         child: ProviderWidget<LoginModel>(

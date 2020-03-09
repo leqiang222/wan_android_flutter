@@ -145,22 +145,25 @@ class LoginButton extends StatelessWidget {
                   .title
                   .copyWith(wordSpacing: 6),
             ),
-      onPressed: model.busy
-          ? null
-          : () {
-              var formState = Form.of(context);
-              if (formState.validate()) {
-                model
-                    .login(nameController.text, passwordController.text)
-                    .then((value) {
-                  if (value) {
-                    Navigator.of(context).pop(true);
-                  } else {
-                    model.showErrorMessage(context);
-                  }
-                });
-              }
-            },
+      onPressed: () {
+        if (model.busy) {
+          return;
+        }
+
+        var formState = Form.of(context);
+        if (!formState.validate()) {
+          return;
+        }
+
+        model.login(nameController.text, passwordController.text).then((value) {
+          if (value) {
+            Navigator.of(context).pop(true);
+          } else {
+            model.showErrorMessage(context);
+          }
+        });
+      }
+
     );
   }
 }
