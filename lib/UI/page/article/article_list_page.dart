@@ -47,7 +47,7 @@ class _ArticleListPageState extends State<ArticleListPage>
         }
         return SmartRefresher(
             controller: model.refreshController,
-            header: WaterDropHeader(),
+//            header: WaterDropHeader(),
             footer: RefresherFooter(),
             onRefresh: model.refresh,
             onLoading: model.loadMore,

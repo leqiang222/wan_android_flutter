@@ -20,6 +20,7 @@ class CoinModel extends ViewStateModel {
 
 /// 个人积分
 class CoinRecordListModel extends ViewStateRefreshListModel<CoinRecord> {
+
   @override
   Future<List<CoinRecord>> loadData({int pageNum}) async {
     return await WanAndroidRepository.fetchCoinRecordList(pageNum);
