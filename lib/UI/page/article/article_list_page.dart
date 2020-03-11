@@ -4,6 +4,7 @@ import 'package:wan_android_flutter/UI/helper/refresh_helper.dart';
 import 'package:wan_android_flutter/UI/widget/article_list_Item.dart';
 import 'package:wan_android_flutter/UI/widget/article_skeleton.dart';
 import 'package:wan_android_flutter/UI/widget/skeleton.dart';
+import 'package:wan_android_flutter/config/resource_manager.dart';
 import 'package:wan_android_flutter/model/article.dart';
 import 'package:wan_android_flutter/model/tree.dart';
 import 'package:wan_android_flutter/provider/provider_widget.dart';
@@ -26,6 +27,40 @@ class _ArticleListPageState extends State<ArticleListPage>
   @override
   bool get wantKeepAlive => true;
 
+  Widget buildHeader2(BuildContext context, RefreshStatus mode){
+    return Center(
+        child:Text(
+            mode == RefreshStatus.idle ? "下拉刷新":mode==RefreshStatus.refreshing?"刷新中...":
+        mode==RefreshStatus.canRefresh?"可以松手了!":mode==RefreshStatus.completed?"刷新成功!":"刷新失败"
+        )
+    );
+  }
+
+  Widget buildHeader(BuildContext context, RefreshStatus mode) {
+    String message = mode == RefreshStatus.idle ? "下拉刷新":mode==RefreshStatus.refreshing?"加载中...":
+    mode==RefreshStatus.canRefresh?"释放加载":mode==RefreshStatus.completed?"刷新成功!":"刷新失败";
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 15),
+      height: 44,
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          Positioned(
+            left: MediaQuery.of(context).size.width * 0.5 - 30 - 64,
+            child: Image.asset(
+              ImageHelper.wrapAssets("logo_weibo.png"),
+              width: 44,
+              height: 44,
+            ),
+          ),
+          Positioned(
+            child: Text(message),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -47,6 +82,9 @@ class _ArticleListPageState extends State<ArticleListPage>
         }
         return SmartRefresher(
             controller: model.refreshController,
+            header: CustomHeader(
+              builder: buildHeader,
+            ),
 //            header: WaterDropHeader(),
             footer: RefresherFooter(),
             onRefresh: model.refresh,

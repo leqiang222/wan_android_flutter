@@ -15,8 +15,56 @@ class TestItemPage extends StatelessWidget {
       body: ListView.builder(
           itemCount: 100,
           itemBuilder: (context, index) {
-            return TestItem();
+            return test2();
           }),
+    );
+  }
+}
+
+class test extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.yellow,
+      padding: EdgeInsets.symmetric(vertical: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Image.asset(
+            ImageHelper.wrapAssets("logo_weibo.png"),
+            width: 44,
+            height: 44,
+          ),
+          SizedBox(width: 20),
+          Text("爱仕达多"),
+        ],
+      ),
+    );
+  }
+}
+
+class test2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 15),
+    height: 44,
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          Positioned(
+            left: MediaQuery.of(context).size.width * 0.5 - 20 - 64,
+            child: Image.asset(
+              ImageHelper.wrapAssets("logo_weibo.png"),
+              width: 44,
+              height: 44,
+            ),
+          ),
+          Positioned(
+            child: Text("爱仕达多"),
+          ),
+        ],
+      ),
     );
   }
 }
