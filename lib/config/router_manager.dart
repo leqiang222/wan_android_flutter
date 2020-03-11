@@ -6,6 +6,7 @@ import 'package:wan_android_flutter/UI/page/splash.dart';
 import 'package:wan_android_flutter/UI/page/tab/tab_main.dart';
 import 'package:wan_android_flutter/UI/user/login_page.dart';
 import 'package:wan_android_flutter/UI/widget/page_route_anim.dart';
+import 'package:wan_android_flutter/UI/widget/test_item_page.dart';
 import 'package:wan_android_flutter/config/storage_manager.dart';
 import 'package:wan_android_flutter/model/article.dart';
 import 'package:wan_android_flutter/view_model/setting_model.dart';
@@ -25,6 +26,7 @@ class RouteName {
   static const String setting = 'setting';
   static const String coinRecordList = 'coinRecordList';
   static const String coinRankingList = 'coinRankingList';
+  static const String testItem = 'testItem';
 }
 
 class Router {
@@ -36,6 +38,8 @@ class Router {
         return NoAnimRouteBuilder(TabMain());
       case RouteName.login:
         return NoAnimRouteBuilder(LoginPage());
+      case RouteName.testItem:
+        return NoAnimRouteBuilder(TestItemPage());
       case RouteName.articleDetail:
         // 获取路由传递的参数
         var article = settings.arguments as Article;

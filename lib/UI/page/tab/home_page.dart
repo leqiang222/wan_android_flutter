@@ -11,6 +11,7 @@ import 'package:wan_android_flutter/UI/widget/animated_provider.dart';
 import 'package:wan_android_flutter/UI/widget/article_list_Item.dart';
 import 'package:wan_android_flutter/UI/widget/article_skeleton.dart';
 import 'package:wan_android_flutter/UI/widget/skeleton.dart';
+import 'package:wan_android_flutter/config/router_manager.dart';
 import 'package:wan_android_flutter/model/article.dart';
 import 'package:wan_android_flutter/provider/provider_widget.dart';
 import 'package:wan_android_flutter/provider/view_state_widget.dart';
@@ -93,6 +94,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
                                   child: IconButton(
                                     icon: Icon(Icons.search),
                                     onPressed: () {
+                                      Navigator.of(context).pushNamed(RouteName.testItem);
 //                                      showSearch(
 //                                          context: context,
 //                                          delegate: DefaultSearchDelegate());
