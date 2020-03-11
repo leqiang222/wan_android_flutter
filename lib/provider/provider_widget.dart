@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 /// 方便数据初始化
 class ProviderWidget<T extends ChangeNotifier> extends StatefulWidget {
   final ValueWidgetBuilder<T> builder;
+  /// 共享状态使用泛型
   final T model;
   final Widget child;
   final Function(T model) onModelReady;

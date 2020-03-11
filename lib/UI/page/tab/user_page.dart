@@ -26,7 +26,7 @@ class _UserPageState extends State<UserPage>
         slivers: <Widget>[
           SliverAppBar(
             pinned: false,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            backgroundColor: Colors.red,
             expandedHeight: 200 + MediaQuery.of(context).padding.top,
             flexibleSpace: UserHeaderWidget(),
             actions: <Widget>[
@@ -44,7 +44,6 @@ class _UserPageState extends State<UserPage>
                 },
               )
             ],
-
           ),
           UserListWidget(),
         ],
