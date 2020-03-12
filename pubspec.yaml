@@ -33,6 +33,8 @@ dependencies:
   shared_preferences: ^0.5.3+5
   # 本地json对象存储
   localstorage: ^2.0.0
+  # 格式化
+  sprintf: ^4.0.2
 
   # Html Encoder/Decoder
   html_unescape: ^1.0.1+3
@@ -74,6 +76,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/load_hud/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

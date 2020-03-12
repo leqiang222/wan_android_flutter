@@ -3,6 +3,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wan_android_flutter/UI/helper/refresh_helper.dart';
 import 'package:wan_android_flutter/UI/widget/article_list_Item.dart';
 import 'package:wan_android_flutter/UI/widget/article_skeleton.dart';
+import 'package:wan_android_flutter/UI/widget/nf_refresh_header.dart';
 import 'package:wan_android_flutter/UI/widget/skeleton.dart';
 import 'package:wan_android_flutter/config/resource_manager.dart';
 import 'package:wan_android_flutter/model/article.dart';
@@ -82,10 +83,10 @@ class _ArticleListPageState extends State<ArticleListPage>
         }
         return SmartRefresher(
             controller: model.refreshController,
-            header: CustomHeader(
-              builder: buildHeader,
-            ),
-//            header: WaterDropHeader(),
+//            header: CustomHeader(
+//              builder: buildHeader,
+//            ),
+            header: NFRefreshHeader(),
             footer: RefresherFooter(),
             onRefresh: model.refresh,
             onLoading: model.loadMore,
