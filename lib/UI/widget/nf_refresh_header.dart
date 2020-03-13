@@ -3,6 +3,13 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:wan_android_flutter/config/resource_manager.dart';
 
+/*
+ * @description: 下拉刷新控件对 pull_to_refresh 的包装
+ * @param: 
+ * @return: 
+ * @author: leqiang222
+ * @date: 2020/3/12
+ */
 class NFRefreshHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -46,38 +53,6 @@ class NFRefreshHeader extends StatelessWidget {
       );
     });
   }
-//  final BuildContext context;
-//  final RefreshStatus mode;
-//
-//  NFRefreshHeader({this.context, this.mode});
-
-//  @override
-//  Widget build(BuildContext context) {
-//    String message = mode == RefreshStatus.idle ? "下拉刷新":mode==RefreshStatus.refreshing?"加载中...":
-//    mode==RefreshStatus.canRefresh?"释放加载":mode==RefreshStatus.completed?"刷新成功!":"刷新失败";
-//    return Container(
-//      margin: EdgeInsets.symmetric(vertical: 15),
-//      height: 44,
-//      child: Stack(
-//        alignment: AlignmentDirectional.center,
-//        children: <Widget>[
-//          Positioned(
-//            left: MediaQuery.of(context).size.width * 0.5 - 30 - 64,
-////            child: Image.asset(
-////              ImageHelper.wrapAssets("logo_weibo.png"),
-////              width: 44,
-////              height: 44,
-////            ),
-//            child: ImagesAnimation(w: 44, h: 44, entry: ImagesAnimationEntry(0, 24, "assets/images/load_hud/nf_loading%02i.png"), durationSeconds: 1,),
-//          ),
-//          Positioned(
-//            child: Text(message),
-//          ),
-//        ],
-//      ),
-//    );
-//  }
-
 }
 
 class ImagesAnimation extends StatefulWidget {

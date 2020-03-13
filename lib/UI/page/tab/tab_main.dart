@@ -55,14 +55,17 @@ class TabMainState extends State<TabMain> {
             },
           )),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _pageSelectedIndex,
-        items: _getTabData(),
-        onTap: (int index) {
-          _pageController.jumpToPage(index);
-        },
-        unselectedItemColor: Colors.grey,
-        selectedItemColor: Colors.green,
-      ),
+          currentIndex: _pageSelectedIndex,
+          items: _getTabData(),
+          onTap: (int index) {
+            _pageController.jumpToPage(index);
+          },
+          unselectedItemColor: Colors.grey,
+          selectedItemColor: Colors.green,
+          showUnselectedLabels: true,
+          selectedFontSize: 12,
+          unselectedFontSize: 12,
+          type: BottomNavigationBarType.fixed),
     );
   }
 
@@ -82,7 +85,7 @@ class TabItemInfo {
   String tabTitle;
   Icon tabIcon;
 
-  static List _tabData = [ 
+  static List _tabData = [
     {
       'tabTitle': '首页',
       'tabIcon': Icon(Icons.home),
