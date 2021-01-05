@@ -82,8 +82,8 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
                               ? Brightness.light
                               : Brightness.dark,
                       flexibleSpace: FlexibleSpaceBar(
-                          title: const Text('玩安卓'),
-                          background: BannerWidget(),
+                        title: const Text('玩安卓'),
+                        background: BannerWidget(),
                       ),
                       actions: <Widget>[
                         /// appbar搜索按钮

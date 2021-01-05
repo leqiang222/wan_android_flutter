@@ -13,7 +13,7 @@ void main() async {
   Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 持久化相关初始化
+  // 持久化管理类初始化
   await StorageManager.init();
 
   runApp(MyApp());
@@ -21,7 +21,8 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   // 本地化
-  final Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates = const [
+  final Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      const [
     S.delegate,
     RefreshLocalizations.delegate, //下拉刷新
     GlobalCupertinoLocalizations.delegate,
