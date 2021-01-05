@@ -38,13 +38,18 @@ class MyApp extends StatelessWidget {
         builder: (context, localeModel, child) {
 //          hideFooterWhenNotFull: true, //列表数据不满一页,不触发加载更多
           return MaterialApp(
-            title: '玩android',
+            // 消除页面右上角的debug条幅
+            debugShowCheckedModeBanner: false,
+            // 初始化的路由名称，app启动一开始就显示这个页面
             initialRoute: RouteName.splash,
             onGenerateRoute: Router.onGenerateRoute,
             locale: localeModel.locale,
             supportedLocales: S.delegate.supportedLocales,
             localizationsDelegates: localizationsDelegates,
-            theme: ThemeData(primarySwatch: Colors.blue),
+            // 设置主题
+            theme: ThemeData(
+                // 主题颜色
+                primarySwatch: Colors.blue),
           );
         },
       ),

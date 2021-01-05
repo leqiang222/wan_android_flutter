@@ -17,6 +17,7 @@ import 'package:wan_android_flutter/util/status_bar_utils.dart';
 import 'package:wan_android_flutter/view_model/home_model.dart';
 import 'package:wan_android_flutter/view_model/tap_to_top_model.dart';
 
+// 下拉释放刷新高度
 const double kHomeRefreshHeight = 180.0;
 
 class HomePage extends StatefulWidget {

@@ -28,8 +28,9 @@ class TabMainState extends State<TabMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // WillPopScope用于处理是否离开当前页面
       body: WillPopScope(
-          // 双击返回与界面退出提示
+          // 双击返回与界面退出提示（仅限安卓，iOS无此交互）
           onWillPop: () async {
             if (_lastPressedTime == null ||
                 DateTime.now().difference(_lastPressedTime) >
@@ -61,7 +62,7 @@ class TabMainState extends State<TabMain> {
             _pageController.jumpToPage(index);
           },
           unselectedItemColor: Colors.grey,
-          selectedItemColor: Colors.green,
+          selectedItemColor: Colors.blue,
           showUnselectedLabels: true,
           selectedFontSize: 12,
           unselectedFontSize: 12,
