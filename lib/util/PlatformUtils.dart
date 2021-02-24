@@ -1,5 +1,8 @@
-
-
+/*
+ * @Descripttion: 
+ * @Author: leqiang222
+ * @Date: 2021-01-04 15:57:35
+ */
 import 'dart:io';
 
 import 'package:device_info/device_info.dart';
@@ -15,6 +18,7 @@ class PlatformUtils {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.version;
   }
+
   static Future<String> getBuildNum() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.buildNumber;
